@@ -12,26 +12,25 @@ int menu(void){
 }
 int main(){
     
-int vetor[MAXTAM],opcao;
-int i,elemento,j;
+int opcao,elemento,cont = 0,j;
+int n;
 criar_fila();
-/*
-inserir_elemento(10);
-inserir_elemento(20);
-inserir_elemento(30);
-inserir_elemento(40);
-inserir_elemento(50);
-inserir_elemento(60);
-inserir_elemento(70);
-
-exibir_fila();
-*/
- while ((opcao = menu()) != 0){
+while ((opcao = menu()) != 0){
 switch (opcao)
 {
 case 1:
+    printf("Quantos elementos deseja adicionar?\n");
+    scanf("%d",&n);
+    for(j=0;j<n;j++){
     scanf("%d",&elemento);
+    if(fila_cheia()){
+        cont++;
+    }  
     inserir_elemento(elemento);
+    }
+    if(fila_cheia() && j==n){
+        printf(" %d elemento(s) foram inserido(s) na fila, mas %d não coube(ram)\n",n,cont);
+    }  
     break;
 case 2:
     remover_elemento(&elemento);
@@ -42,7 +41,9 @@ case 3:
 default:
     break;
 }
+putchar('\n');
 }
+
 
 
 

@@ -60,16 +60,20 @@ int fila_vazia(){
 }
 void exibir_fila(void){
         int i;
-        
-        for(i=0;i!=ultimo;i++){  
+        /*
+        for(i=0;i<total;i++){  
             //printf("primeiro %d ultimo %d\n",primeiro,ultimo);    
-            printf("%d | ",vetor[i]);
+            printf("elemento %d | primeiro %d | ultimo %d \n ",vetor[i],primeiro,ultimo);
         }
-        printf("%d | ", vetor[ultimo]);
-        
+        */
         //printf("ele %d |",vetor[ultimo]);
+        while( remover_elemento(vetor) ){
+        printf("primeiro %d\n",primeiro);
+        printf("\nValor:%d\n",vetor[primeiro]);
+       
+        }
         printf("\n");
-        putchar('\n');
             
 }
+
 
