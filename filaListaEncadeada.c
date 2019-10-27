@@ -56,10 +56,13 @@ int inserir_elemento(int y){
 }
 void exibir(){
 	//celula *p = l->prox;]
+	printf("------------------------------\n");
 	printf("|");
 	for(celula*p=fila->prox;p!=fila;p=p->prox){	
 		printf("%d |",p->dado);
 	}
+	printf("\n");
+	printf("------------------------------\n");
 	
 }
 
