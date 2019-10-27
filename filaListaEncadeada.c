@@ -1,60 +1,75 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAXTAM 5
 typedef struct celula{
 	int dado;
 	struct celula *prox;
 
 }celula;
+int num_elementos=0;
 
 celula *fila;
-int inicializa_fila(){
+int criar_fila(){
 	fila = malloc(sizeof(celula));
 	fila->prox = fila;
 	if(fila==NULL)
 		return 0;
 	return 1;
 }
-int desenfileira(int *y){
-	if(fila->prox==fila)
+int fila_cheia(){
+	if(num_elementos==MAXTAM)
+		return 1;
+	else
 		return 0;
+}
+int fila_vazia(){
+	if(fila->prox==fila)
+		return 1;
+	else
+		return 0;
+}
+int remover_elemento(int *y){
+	if(fila_vazia()){
+		//printf("vazia");
+		return 0;
+	}
 	celula *lixo = fila->prox;
 	*y = lixo->dado;
 	fila->prox = lixo->prox;
+	num_elementos--;
 	free(lixo);
 	return 1;
 }
-int enfileira(int y){
+int inserir_elemento(int y){
 	celula *novo = malloc(sizeof(celula));	
-	if(novo==NULL){
+	if(fila_cheia()){
 		return 0;
 	}
+	//printf("%ld",sizeof(fila->prox)/sizeof(fila->dado));
 	novo->prox = fila->prox;
 	fila->prox=novo;
 	fila->dado=y;
 	fila=novo;
+	num_elementos++;
 	return 1;	
 }
-void imprime(celula *l){
-	//celula *p = l->prox;
-	for(celula*p=l->prox;p!=l;p=p->prox)
+void exibir(){
+	//celula *p = l->prox;]
+	printf("|");
+	for(celula*p=fila->prox;p!=fila;p=p->prox){	
 		printf("%d |",p->dado);
+	}
+	
 }
 
 int destruir_fila(){
 	int elem;
-	while(desenfileira(&elem));
+	while(remover_elemento(&elem));
 	free(fila);
 	return 1;
 }
 
-int main(){
-	inicializa_fila();
-	enfileira(1);
-	enfileira(2);
-	enfileira(3);
-	imprime(fila);
-	//printf("%d",p->dado);
-	return 0;
-}
+
+
+
