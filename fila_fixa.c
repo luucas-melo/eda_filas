@@ -15,36 +15,35 @@ void criar_fila(){
 
 int inserir_elemento(int elemento){
     if(fila_cheia()){
-        printf("fila cheia\n");
+        printf("fila cheia porra\n");
         return 0;    
     }  
-    if(fila_vazia()){
-        primeiro = 0;
-    }
     ultimo = ultimo+1;
     vetor[ultimo] = elemento;
     num_elementos++;
     total++;
-    //printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
+    printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
     return 1;
 }
 
 int remover_elemento(int *elemento){
-    if(fila_vazia())
+    if(fila_vazia()){
+        printf("fila vazia\n");
         return 0;
+    }
     *elemento = vetor[primeiro];
     primeiro = primeiro+1;
     num_elementos--;
     //printf("%d\n",vetor[ultimo]);
     //printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
-    //printf("elemento removido %d\n",*elemento);
+    printf("elemento removido %d\n",*elemento);
     return 1;
      
 
 }
 
 int fila_cheia(){
-    if(num_elementos>=MAXTAM){
+    if(ultimo>=MAXTAM-1){
         return 1;
     }
     else
@@ -58,18 +57,27 @@ int fila_vazia(){
     else 
         return 0;
 }
-void exibir_fila(void){
+void exibir(void){
         int i;
         
-        for(i=0;i!=ultimo;i++){  
+        for(i=primeiro;i<=ultimo;i++){  
             //printf("primeiro %d ultimo %d\n",primeiro,ultimo);    
             printf("%d | ",vetor[i]);
         }
-        printf("%d | ", vetor[ultimo]);
+        //printf("%d | ", vetor[ultimo]);
         
         //printf("ele %d |",vetor[ultimo]);
         printf("\n");
-        putchar('\n');
+        
             
 }
+int destruir_fila(){
+    primeiro = -1;
+    ultimo = -1;
+    return 0;
+}
 
+int tamanho_fila(){
+
+    return total;
+}

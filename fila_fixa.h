@@ -6,7 +6,9 @@ int inserir_elemento(int elemento);
 int remover_elemento(int *elemento);
 int fila_cheia();
 int fila_vazia();
-void exibir_fila(void);
+void exibir();
+int destruir_fila();
+int tamanho_fila();
 
 
 
