@@ -20,7 +20,7 @@ int inserir_elemento(int elemento){
     }  
     ultimo = ultimo+1;
     vetor[ultimo] = elemento;
-    num_elementos++;
+    
     total++;
     printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
     return 1;
@@ -28,15 +28,16 @@ int inserir_elemento(int elemento){
 
 int remover_elemento(int *elemento){
     if(fila_vazia()){
-        printf("fila vazia\n");
+        //printf("fila vazia\n");
         return 0;
     }
     *elemento = vetor[primeiro];
     primeiro = primeiro+1;
-    num_elementos--;
+    
     //printf("%d\n",vetor[ultimo]);
-    //printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
-    printf("elemento removido %d\n",*elemento);
+    printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
+    //printf("elemento removido %d\n",*elemento);
+
     return 1;
      
 
@@ -52,32 +53,48 @@ int fila_cheia(){
 }
 
 int fila_vazia(){
-    if(num_elementos==0)
+    if(ultimo+1==primeiro){
+        printf("primeiro %d\n",primeiro);
         return 1;
+}
     else 
         return 0;
 }
+int tamanho_fila(){
+
+    return MAXTAM;
+}
 void exibir(void){
         int i;
-        
-        for(i=primeiro;i<=ultimo;i++){  
-            //printf("primeiro %d ultimo %d\n",primeiro,ultimo);    
+        for(i=0;i<tamanho_fila();i++){
+            printf("----");
+        }
+        printf("-");
+        printf("\n| ");
+        for(i=0;i<tamanho_fila();i++){     
             printf("%d | ",vetor[i]);
         }
-        //printf("%d | ", vetor[ultimo]);
-        
-        //printf("ele %d |",vetor[ultimo]);
         printf("\n");
-        
+        for(i=0;i<tamanho_fila();i++){
+            printf("----");
+        }
+        printf("-");
+        printf("\n");
+        printf("  ");
+        for(i=0;i<tamanho_fila();i++){     
+            if (i==primeiro){
+                printf("p");
+            }
+            if (i==ultimo){
+                printf("u");
+            }
             
-}
+            printf("    ");
+        }
+} 
 int destruir_fila(){
     primeiro = -1;
     ultimo = -1;
     return 0;
 }
 
-int tamanho_fila(){
-
-    return total;
-}

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXTAM 5
+
 typedef struct celula{
 	int dado;
 	struct celula *prox;
@@ -18,10 +18,7 @@ int criar_fila(){
 	return 1;
 }
 int fila_cheia(){
-	if(num_elementos==MAXTAM)
-		return 1;
-	else
-		return 0;
+	return 0;
 }
 int fila_vazia(){
 	if(fila->prox==fila)
@@ -43,7 +40,7 @@ int remover_elemento(int *y){
 }
 int inserir_elemento(int y){
 	celula *novo = malloc(sizeof(celula));	
-	if(fila_cheia()){
+	if(novo==NULL){
 		return 0;
 	}
 	//printf("%ld",sizeof(fila->prox)/sizeof(fila->dado));
@@ -64,6 +61,9 @@ void exibir(){
 	printf("\n");
 	printf("------------------------------\n");
 	
+}
+int tamanho_fila(){
+	return num_elementos;
 }
 
 int destruir_fila(){

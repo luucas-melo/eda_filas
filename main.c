@@ -1,22 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "filaListaEncadeada.h"
+#include "fila_fixa.h"
 #define MAXTAM 5
 int menu(void){
     int opcao;
     printf("1-inserir elemento\n");
     printf("2-remover elemento\n");
     printf("3-exibir fila\n");
+    printf("4-Reiniciar fila\n");
+    printf("5-Sair\n");
     scanf("%d",&opcao);
     return opcao;
 }
 int main(){
     
-int opcao,elemento,vetor[MAXTAM];
+int opcao,vetor[MAXTAM];
 int n;
 criar_fila();
 int cont = -1,j;
-while ((opcao = menu()) != 0){
+while ((opcao = menu()) != 5){
 switch (opcao)
 {
 case 1:
@@ -24,7 +26,7 @@ case 1:
     scanf("%d",&n);
     for(j=0;j<n;j++){
     scanf("%d",&vetor[j]);
-    if(&vetor[j]>=0 && vetor[j]<=900)
+    if(&vetor[j]>=0 && vetor[j]<=999)
         inserir_elemento(vetor[j]);
     else
         printf(" Elemento %d não foi inserido -> Digite um numero positivo maior que 1000\n",vetor[j]);
@@ -34,6 +36,7 @@ case 1:
     }
     if(fila_cheia() && j==n){
         printf(" %d elemento(s) foram inserido(s) na fila, mas %d não coube(ram)\n",n,cont);
+         cont=0;
     }  
     break;
 case 2:
@@ -51,6 +54,10 @@ case 2:
     break;
 case 3:
     exibir();
+    break;
+case 4:
+    destruir_fila();
+case 5:
     break;
 default:
     break;
