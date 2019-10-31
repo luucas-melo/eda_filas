@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "fila_redimensionamento.h"
 int *fila;
 
 int primeiro, ultimo, MAXTAM;
+int num_elementos;
 
-
-int criar_fila(){
+int cria_fila(){
     primeiro=0;
     ultimo=0;
     MAXTAM=5;
+    num_elementos=0;
     fila=malloc(MAXTAM*sizeof(int));
     if(fila==NULL){
         return 0;
@@ -18,6 +20,8 @@ int criar_fila(){
 int redimensiona(){
     int i,j;
     fila=realloc(fila,2*MAXTAM*sizeof(int));
+    if(fila==NULL)
+        return 0;
     if(primeiro>ultimo){
         if(MAXTAM-primeiro>ultimo){
             for(i=0,j=MAXTAM;i<ultimo;i++,j++){
@@ -38,29 +42,79 @@ int redimensiona(){
     MAXTAM=MAXTAM*2;
     return 1;
 }
-int inserir_elemento(int elemento){
+int insere_elemento(int elemento){
     if((ultimo+1)%MAXTAM==primeiro)
         if(!redimensiona())
             return 0;
-    
+    num_elementos++;
     fila[ultimo]=elemento;
     ultimo=(ultimo+1)%MAXTAM;
     return 1;
 }
-int remover_elemento(int *elemento){
-    if(primeiro==ultimo){
+int remove_elemento(int *elemento){
+    if(fila_vazia()){
+        //printf("fila vazia\n");
         return 0;
     }
-    *elemento=fila[primeiro];
-    primeiro=(primeiro+1)%MAXTAM;
+    *elemento = fila[primeiro];
+    primeiro = (primeiro+1)%MAXTAM;
+    num_elementos--;
+    
     return 1;
 }
 
+int fila_cheia(){
+    return 0;
+}
+
+int fila_vazia(){
+    if((primeiro==0 && ultimo==0)|| num_elementos==0){
+        return 1;
+    }
+    return 0;
+}
+int reinicia_fila(){
+	free(fila);
+    cria_fila();
+}
+
+int tamanho_fila(){
+
+    return MAXTAM;
+}
 
 void imprime(){
-	//celula *p = l->prox;
-	for(int i=0;i<MAXTAM;i++)
-		printf("%d|",fila[i]);
-    printf("p %d u %d \n",primeiro,ultimo);
+	for(int i=0;i<tamanho_fila();i++){
+		printf("------");
+	}
+	printf("-");
+	printf("\n");
+	printf("| ");
+	for(int i=0;i<tamanho_fila();i++){
+		printf("%.3d | ",fila[i]);
+    }
+    printf("\n");
+	for(int i=0;i<tamanho_fila();i++){
+		printf("------");
+		
+	}
+	printf("-");
+	printf("\n");
+	if(!fila_vazia()){
+        for(int i=0;i<tamanho_fila();i++){
+            if(i==primeiro){
+                printf("  p");
+            }
+            if(i==ultimo-1){
+                printf(" u");
+            }
+            if (i==tamanho_fila()-1 && ultimo==0){
+                printf(" u");
+            }
+
+            printf("      ");
+        }
+    }
+    
 }
 

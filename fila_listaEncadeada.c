@@ -70,17 +70,17 @@ void imprime(){
 	}
 	printf("-");
 	printf("\n");
-	
-	for(int i=0;i<num_elementos;i++){
-		if(i==0){
-			printf("  p");
+	if(!fila_vazia()){
+		for(int i=0;i<num_elementos;i++){
+			if(i==0){
+				printf("  p");
+			}
+			if(i==num_elementos-1){
+				printf(" u");
+			}
+			printf("      ");
 		}
-		if(i==num_elementos-1){
-			printf(" u");
-		}
-		printf("      ");
 	}
-	
 
 }
 int tamanho_fila(){

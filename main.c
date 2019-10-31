@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "fila_fixa.h"
+#include "fila_redimensionamento.h"
 #define MAXTAM 5
 int menu(void){
     int opcao;

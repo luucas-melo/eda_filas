@@ -6,11 +6,10 @@ int primeiro;
 int ultimo;
 int num_elementos;
 int vetor[MAXTAM];
-int total;
+
 void cria_fila(){
     primeiro = 0;
     ultimo = -1;
-    num_elementos = 0;
 }
 
 int insere_elemento(int elemento){
@@ -19,10 +18,6 @@ int insere_elemento(int elemento){
     }  
     ultimo = ultimo+1;
     vetor[ultimo] = elemento;
-    
-    
-    total++;
-    printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
     return 1;
 }
 
@@ -42,9 +37,7 @@ int remove_elemento(int *elemento){
     }
     
     
-    //printf("%d\n",vetor[ultimo]);
-    printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
-    //printf("elemento removido %d\n",*elemento);
+    
 
     return 1;
      
@@ -89,19 +82,23 @@ void imprime(){
         printf("-");
         printf("\n");
         printf("  ");
-        for(i=0;i<tamanho_fila();i++){     
-            if (i==primeiro){
-                printf("p");
+        if(!fila_vazia()){
+            for(i=0;i<tamanho_fila();i++){     
+                if (i==primeiro){
+                    printf("p");
+                }
+                if (i==ultimo){
+                    printf(" u");
+                }
+                
+                printf("      ");
             }
-            if (i==ultimo){
-                printf(" u");
-            }
-            
-            printf("      ");
         }
-        
 } 
 int reinicia_fila(){
+    for(int i=0;i<tamanho_fila();i++){
+        vetor[i]=0;
+    }
     cria_fila();
     return 1    ;
 }
