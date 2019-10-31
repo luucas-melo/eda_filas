@@ -7,32 +7,40 @@ int ultimo;
 int num_elementos;
 int vetor[MAXTAM];
 int total;
-void criar_fila(){
+void cria_fila(){
     primeiro = 0;
     ultimo = -1;
     num_elementos = 0;
 }
 
-int inserir_elemento(int elemento){
+int insere_elemento(int elemento){
     if(fila_cheia()){
-        printf("fila cheia porra\n");
         return 0;    
     }  
     ultimo = ultimo+1;
     vetor[ultimo] = elemento;
+    
     
     total++;
     printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
     return 1;
 }
 
-int remover_elemento(int *elemento){
+int remove_elemento(int *elemento){
     if(fila_vazia()){
         //printf("fila vazia\n");
         return 0;
     }
     *elemento = vetor[primeiro];
     primeiro = primeiro+1;
+    
+    if(primeiro>MAXTAM-1){
+        primeiro=0; 
+    }
+    if(fila_cheia()){
+        return 0;
+    }
+    
     
     //printf("%d\n",vetor[ultimo]);
     printf("primeiro: %d  ultimo %d\n",primeiro,ultimo);
@@ -54,7 +62,7 @@ int fila_cheia(){
 
 int fila_vazia(){
     if(ultimo+1==primeiro){
-        printf("primeiro %d\n",primeiro);
+
         return 1;
 }
     else 
@@ -64,19 +72,19 @@ int tamanho_fila(){
 
     return MAXTAM;
 }
-void exibir(void){
+void imprime(){
         int i;
         for(i=0;i<tamanho_fila();i++){
-            printf("----");
+            printf("------");
         }
         printf("-");
         printf("\n| ");
         for(i=0;i<tamanho_fila();i++){     
-            printf("%d | ",vetor[i]);
+            printf("%.3d | ",vetor[i]);
         }
         printf("\n");
         for(i=0;i<tamanho_fila();i++){
-            printf("----");
+            printf("------");
         }
         printf("-");
         printf("\n");
@@ -86,15 +94,15 @@ void exibir(void){
                 printf("p");
             }
             if (i==ultimo){
-                printf("u");
+                printf(" u");
             }
             
-            printf("    ");
+            printf("      ");
         }
+        
 } 
-int destruir_fila(){
-    primeiro = -1;
-    ultimo = -1;
-    return 0;
+int reinicia_fila(){
+    cria_fila();
+    return 1    ;
 }
 

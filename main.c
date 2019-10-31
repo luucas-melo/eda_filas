@@ -16,7 +16,7 @@ int main(){
     
 int opcao,vetor[MAXTAM];
 int n;
-criar_fila();
+cria_fila();
 int cont = -1,j;
 while ((opcao = menu()) != 5){
 switch (opcao)
@@ -25,14 +25,14 @@ case 1:
     printf("Quantos elementos deseja adicionar?\n");
     scanf("%d",&n);
     for(j=0;j<n;j++){
-    scanf("%d",&vetor[j]);
-    if(&vetor[j]>=0 && vetor[j]<=999)
-        inserir_elemento(vetor[j]);
-    else
-        printf(" Elemento %d não foi inserido -> Digite um numero positivo maior que 1000\n",vetor[j]);
-    if(fila_cheia()){
-        cont++;
-    }  
+        scanf("%d",&vetor[j]);
+        if(&vetor[j]>=0 && vetor[j]<=999)
+            insere_elemento(vetor[j]);
+        else
+            printf(" Elemento %d não foi inserido -> Digite um numero positivo maior que 1000\n",vetor[j]);
+        if(fila_cheia()){
+            cont++;
+        }  
     }
     if(fila_cheia() && j==n){
         printf(" %d elemento(s) foram inserido(s) na fila, mas %d não coube(ram)\n",n,cont);
@@ -44,19 +44,20 @@ case 2:
     scanf("%d",&n);
     for(int i=0;i<n;i++){
         if(!fila_vazia()){
-            remover_elemento(vetor);
+            remove_elemento(&vetor[i]);
             printf("Elemento removido: %d\n",vetor[i]);
         }  
         else{   
-             printf("não é possivel remover mais elementos, pois a fila está vazia\n");
+            if(i==n-1)
+                printf("não é possivel remover mais elementos, pois a fila está vazia\n");
         }
     }
     break;
 case 3:
-    exibir();
+    imprime();
     break;
 case 4:
-    destruir_fila();
+    reinicia_fila();
 case 5:
     break;
 default:

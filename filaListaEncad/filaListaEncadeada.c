@@ -36,9 +36,8 @@ int enfileira(int y){
 	fila=novo;
 	return 1;	
 }
-void imprime(celula *l){
-	//celula *p = l->prox;
-	for(celula*p=l->prox;p!=l;p=p->prox)
+void imprime(){
+	for(celula*p=fila->prox;p!=fila;p=p->prox)
 		printf("%d |",p->dado);
 }
 
@@ -54,7 +53,8 @@ int main(){
 	enfileira(1);
 	enfileira(2);
 	enfileira(3);
+	desenfileira(&fila->dado);
+	enfileira(4);
 	imprime(fila);
-	//printf("%d",p->dado);
 	return 0;
 }

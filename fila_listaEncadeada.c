@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "fila_listaEncadeada.h"
 
 
 typedef struct celula{
@@ -10,7 +11,7 @@ typedef struct celula{
 int num_elementos=0;
 
 celula *fila;
-int criar_fila(){
+int cria_fila(){
 	fila = malloc(sizeof(celula));
 	fila->prox = fila;
 	if(fila==NULL)
@@ -26,19 +27,19 @@ int fila_vazia(){
 	else
 		return 0;
 }
-int remover_elemento(int *y){
+int remove_elemento(int *elemento){
 	if(fila_vazia()){
 		//printf("vazia");
 		return 0;
 	}
 	celula *lixo = fila->prox;
-	*y = lixo->dado;
+	*elemento = lixo->dado;
 	fila->prox = lixo->prox;
 	num_elementos--;
 	free(lixo);
 	return 1;
 }
-int inserir_elemento(int y){
+int insere_elemento(int elemento){
 	celula *novo = malloc(sizeof(celula));	
 	if(novo==NULL){
 		return 0;
@@ -46,30 +47,51 @@ int inserir_elemento(int y){
 	//printf("%ld",sizeof(fila->prox)/sizeof(fila->dado));
 	novo->prox = fila->prox;
 	fila->prox=novo;
-	fila->dado=y;
+	fila->dado=elemento;
 	fila=novo;
 	num_elementos++;
 	return 1;	
 }
-void exibir(){
+void imprime(){
 	//celula *p = l->prox;]
-	printf("------------------------------\n");
-	printf("|");
+	for(int i=0;i<num_elementos;i++){
+		printf("------");
+	}
+	printf("-");
+	printf("\n");
+	printf("| ");
 	for(celula*p=fila->prox;p!=fila;p=p->prox){	
-		printf("%d |",p->dado);
+		printf("%.3d | ",p->dado);
 	}
 	printf("\n");
-	printf("------------------------------\n");
+	for(int i=0;i<num_elementos;i++){
+		printf("------");
+		
+	}
+	printf("-");
+	printf("\n");
 	
+	for(int i=0;i<num_elementos;i++){
+		if(i==0){
+			printf("  p");
+		}
+		if(i==num_elementos-1){
+			printf(" u");
+		}
+		printf("      ");
+	}
+	
+
 }
 int tamanho_fila(){
 	return num_elementos;
 }
 
-int destruir_fila(){
+int reinicia_fila(){
 	int elem;
-	while(remover_elemento(&elem));
-	free(fila);
+	while(remove_elemento(&elem));
+		free(fila);
+	cria_fila();	
 	return 1;
 }
 
